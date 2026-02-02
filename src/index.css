@@ -1,96 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Romantic Valentine's palette */
+    --background: 350 100% 97%;
+    --foreground: 340 50% 25%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 350 100% 99%;
+    --card-foreground: 340 50% 25%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 350 100% 99%;
+    --popover-foreground: 340 50% 25%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 340 82% 65%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 350 60% 90%;
+    --secondary-foreground: 340 50% 30%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 350 40% 93%;
+    --muted-foreground: 340 30% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 0 75% 65%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 350 40% 85%;
+    --input: 350 40% 85%;
+    --ring: 340 82% 65%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Custom Valentine's colors */
+    --love-pink: 340 82% 65%;
+    --love-rose: 350 80% 72%;
+    --love-blush: 350 100% 95%;
+    --love-red: 0 75% 60%;
+    --love-coral: 10 80% 68%;
+    --love-cream: 30 100% 97%;
+    --love-deep: 340 60% 40%;
+    
+    /* Gradients */
+    --gradient-romantic: linear-gradient(135deg, hsl(350, 100%, 95%) 0%, hsl(340, 100%, 92%) 50%, hsl(350, 80%, 90%) 100%);
+    --gradient-love: linear-gradient(180deg, hsl(340, 82%, 65%) 0%, hsl(0, 75%, 60%) 100%);
+    --gradient-sunset: linear-gradient(135deg, hsl(350, 100%, 92%) 0%, hsl(30, 100%, 95%) 100%);
+    
+    /* Shadows */
+    --shadow-love: 0 4px 20px -4px hsl(340, 82%, 65%, 0.3);
+    --shadow-heart: 0 8px 32px -8px hsl(0, 75%, 60%, 0.4);
+    --shadow-soft: 0 2px 12px -2px hsl(340, 50%, 50%, 0.15);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 340 30% 10%;
+    --foreground: 350 100% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 340 25% 15%;
+    --card-foreground: 350 100% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 340 25% 15%;
+    --popover-foreground: 350 100% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 340 82% 65%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 340 30% 20%;
+    --secondary-foreground: 350 100% 90%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 340 25% 20%;
+    --muted-foreground: 350 40% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 0 75% 55%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 340 25% 25%;
+    --input: 340 25% 25%;
+    --ring: 340 82% 65%;
   }
 }
 
@@ -100,6 +94,165 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Quicksand', sans-serif;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Dancing Script', cursive;
+  }
+}
+
+@layer components {
+  .font-cursive {
+    font-family: 'Dancing Script', cursive;
+  }
+
+  .font-body {
+    font-family: 'Quicksand', sans-serif;
+  }
+
+  .gradient-romantic {
+    background: var(--gradient-romantic);
+  }
+
+  .gradient-love {
+    background: var(--gradient-love);
+  }
+
+  .shadow-love {
+    box-shadow: var(--shadow-love);
+  }
+
+  .shadow-heart {
+    box-shadow: var(--shadow-heart);
+  }
+
+  .text-love-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@layer utilities {
+  /* Floating heart animation */
+  @keyframes float-heart {
+    0%, 100% {
+      transform: translateY(0) rotate(-5deg);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translateY(-20px) rotate(5deg);
+      opacity: 1;
+    }
+  }
+
+  @keyframes float-up {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes pulse-heart {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+
+  @keyframes wiggle {
+    0%, 100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+
+  @keyframes bounce-soft {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes sparkle {
+    0%, 100% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-float-heart {
+    animation: float-heart 3s ease-in-out infinite;
+  }
+
+  .animate-float-up {
+    animation: float-up 15s linear infinite;
+  }
+
+  .animate-pulse-heart {
+    animation: pulse-heart 1.5s ease-in-out infinite;
+  }
+
+  .animate-wiggle {
+    animation: wiggle 0.5s ease-in-out infinite;
+  }
+
+  .animate-bounce-soft {
+    animation: bounce-soft 2s ease-in-out infinite;
+  }
+
+  .animate-sparkle {
+    animation: sparkle 2s ease-in-out infinite;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.6s ease-out forwards;
+  }
+
+  .heart-btn {
+    @apply relative overflow-hidden;
+  }
+
+  .heart-btn::before {
+    content: '💕';
+    @apply absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300;
+  }
+
+  .heart-btn:hover::before {
+    @apply opacity-100;
   }
 }
