@@ -1,46 +1,60 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Heart } from 'lucide-react';
 
-// Easy to edit gallery - replace with your own images
+// ═══════════════════════════════════════════════════════════════
+// 🖼️ GALLERY IMAGES - EDIT YOUR PHOTOS HERE!
+// Replace "src" with your image path (e.g., "/my-photo.jpg")
+// Update "caption" and "date" for each memory
+// ═══════════════════════════════════════════════════════════════
 const galleryImages = [
   {
     id: 1,
-    src: "/placeholder.svg",
+    src: "/placeholder.svg", // 👈 Replace with your image
     caption: "Our first adventure together 💕",
     date: "January 2024"
   },
   {
     id: 2,
-    src: "/placeholder.svg",
+    src: "/placeholder.svg", // 👈 Replace with your image
     caption: "That sunset we'll never forget 🌅",
     date: "February 2024"
   },
   {
     id: 3,
-    src: "/placeholder.svg",
+    src: "/placeholder.svg", // 👈 Replace with your image
     caption: "Just us being silly 😂",
     date: "March 2024"
   },
   {
     id: 4,
-    src: "/placeholder.svg",
+    src: "/placeholder.svg", // 👈 Replace with your image
     caption: "Our favorite spot 🌸",
     date: "April 2024"
   },
   {
     id: 5,
-    src: "/placeholder.svg",
+    src: "/placeholder.svg", // 👈 Replace with your image
     caption: "Making memories 💖",
     date: "May 2024"
   },
   {
     id: 6,
-    src: "/placeholder.svg",
+    src: "/placeholder.svg", // 👈 Replace with your image
     caption: "Forever my favorite person 💝",
     date: "June 2024"
   },
 ];
+
+// ═══════════════════════════════════════════════════════════════
+// 🥰 FIRST DATE SECTION - EDIT YOUR SPECIAL PHOTO HERE!
+// ═══════════════════════════════════════════════════════════════
+const firstDatePhoto = {
+  src: "/placeholder.svg", // 👈 Replace with your first date photo
+  caption: "Where it all began... 💕",
+  date: "Our First Date"
+};
 
 interface GalleryImage {
   id: number;
@@ -52,6 +66,7 @@ interface GalleryImage {
 export const ImageGallery = () => {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
   const [revealedImages, setRevealedImages] = useState<number[]>([]);
+  const [firstDateRevealed, setFirstDateRevealed] = useState(false);
 
   const handleReveal = (id: number) => {
     if (!revealedImages.includes(id)) {
@@ -61,99 +76,245 @@ export const ImageGallery = () => {
     if (image) setSelectedImage(image);
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.9 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: {
+        type: "spring" as const,
+        stiffness: 100,
+        damping: 12
+      }
+    }
+  };
+
   return (
     <section className="min-h-screen gradient-romantic py-20 px-4">
       <div className="max-w-6xl mx-auto">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
+          <motion.div
+            className="flex justify-center gap-3 mb-4"
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
+          >
+            {['💕', '📸', '💕'].map((emoji, i) => (
+              <motion.span
+                key={i}
+                className="text-4xl"
+                animate={{ 
+                  y: [0, -8, 0],
+                  rotate: i === 1 ? [0, 5, -5, 0] : 0
+                }}
+                transition={{ 
+                  duration: 2,
+                  delay: i * 0.2,
+                  repeat: Infinity,
+                }}
+              >
+                {emoji}
+              </motion.span>
+            ))}
+          </motion.div>
           <h2 className="text-4xl sm:text-6xl font-cursive text-love-gradient mb-4">
-            Our Precious Memories 📸
+            Our Precious Memories
           </h2>
           <p className="text-lg text-muted-foreground">
-            Click on each memory to reveal and relive the moment
+            Click on each memory to reveal our special moments
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {galleryImages.map((image, index) => {
+        {/* Gallery Grid */}
+        <motion.div 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {galleryImages.map((image) => {
             const isRevealed = revealedImages.includes(image.id);
             
             return (
               <motion.div
                 key={image.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                variants={itemVariants}
                 onClick={() => handleReveal(image.id)}
                 className="cursor-pointer group"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <div className="relative aspect-square rounded-2xl overflow-hidden shadow-love hover:shadow-heart transition-all duration-300">
+                <div className="relative aspect-square rounded-2xl overflow-hidden shadow-love hover:shadow-heart transition-all duration-500">
                   {!isRevealed ? (
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30 backdrop-blur-md flex flex-col items-center justify-center"
-                      whileHover={{ scale: 1.05 }}
+                      className="absolute inset-0 bg-gradient-to-br from-primary/40 to-accent/40 backdrop-blur-md flex flex-col items-center justify-center"
                     >
-                      <motion.span
-                        className="text-6xl mb-4"
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
+                      <motion.div
+                        className="relative"
+                        animate={{ 
+                          scale: [1, 1.15, 1],
+                        }}
+                        transition={{ 
+                          duration: 1.5, 
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
                       >
-                        💝
-                      </motion.span>
-                      <p className="text-foreground font-medium">Click to reveal</p>
+                        <span className="text-6xl">💝</span>
+                        <motion.div
+                          className="absolute -top-1 -right-1"
+                          animate={{ scale: [0, 1, 0] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                        >
+                          <Heart className="w-4 h-4 text-primary fill-primary" />
+                        </motion.div>
+                      </motion.div>
+                      <p className="text-foreground font-medium mt-4">Click to reveal</p>
                       <p className="text-sm text-muted-foreground mt-2">{image.date}</p>
                     </motion.div>
                   ) : (
-                    <>
+                    <motion.div
+                      initial={{ opacity: 0, scale: 1.1 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="w-full h-full"
+                    >
                       <img
                         src={image.src}
                         alt={image.caption}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <motion.div 
+                        className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 1 }}
+                      >
                         <div className="absolute bottom-4 left-4 right-4 text-white">
-                          <p className="font-medium">{image.caption}</p>
-                          <p className="text-sm opacity-80">{image.date}</p>
+                          <motion.p 
+                            className="font-cursive text-xl"
+                            initial={{ y: 20, opacity: 0 }}
+                            whileInView={{ y: 0, opacity: 1 }}
+                          >
+                            {image.caption}
+                          </motion.p>
+                          <p className="text-sm opacity-80 mt-1">{image.date}</p>
                         </div>
+                      </motion.div>
+                      {/* Corner heart decoration */}
+                      <div className="absolute top-3 right-3">
+                        <motion.div
+                          animate={{ scale: [1, 1.2, 1] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          <Heart className="w-6 h-6 text-white drop-shadow-lg fill-primary/80" />
+                        </motion.div>
                       </div>
-                    </>
+                    </motion.div>
                   )}
                 </div>
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
-        {/* First Date Image Reveal */}
+        {/* ═══════════════════════════════════════════════════════════════ */}
+        {/* 💕 FIRST DATE SECTION */}
+        {/* ═══════════════════════════════════════════════════════════════ */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 text-center"
+          transition={{ delay: 0.3 }}
+          className="mt-20 text-center"
         >
-          <h3 className="text-3xl font-cursive text-love-gradient mb-8">
-            Our First Date 💕
-          </h3>
           <motion.div
-            className="max-w-xl mx-auto rounded-3xl overflow-hidden shadow-heart"
-            whileHover={{ scale: 1.02 }}
+            className="flex justify-center gap-2 mb-4"
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
           >
-            <div className="relative aspect-video bg-gradient-to-br from-primary/20 to-accent/20">
-              <img
-                src="/placeholder.svg"
-                alt="Our first date"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                <p className="text-white text-xl font-cursive">
-                  Replace with your first date photo 📸
-                </p>
-              </div>
+            <span className="text-3xl">💑</span>
+          </motion.div>
+          <h3 className="text-3xl sm:text-4xl font-cursive text-love-gradient mb-8">
+            Our First Date
+          </h3>
+          
+          <motion.div
+            className="max-w-xl mx-auto"
+            whileHover={{ scale: 1.02 }}
+            onClick={() => setFirstDateRevealed(true)}
+          >
+            <div className="relative aspect-video rounded-3xl overflow-hidden shadow-heart cursor-pointer">
+              <AnimatePresence mode="wait">
+                {!firstDateRevealed ? (
+                  <motion.div
+                    key="hidden"
+                    className="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30 backdrop-blur-sm flex flex-col items-center justify-center"
+                    exit={{ opacity: 0, scale: 0.9 }}
+                  >
+                    <motion.span
+                      className="text-7xl mb-4"
+                      animate={{ 
+                        rotate: [0, 10, -10, 0],
+                        scale: [1, 1.1, 1]
+                      }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      📸
+                    </motion.span>
+                    <p className="text-xl font-cursive text-foreground">
+                      Click to reveal our special moment
+                    </p>
+                    <motion.p
+                      className="text-muted-foreground mt-2"
+                      animate={{ opacity: [0.5, 1, 0.5] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      {firstDatePhoto.date}
+                    </motion.p>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="revealed"
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="w-full h-full"
+                  >
+                    <img
+                      src={firstDatePhoto.src}
+                      alt={firstDatePhoto.caption}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end justify-center pb-6">
+                      <motion.p
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                        className="text-white text-2xl font-cursive"
+                      >
+                        {firstDatePhoto.caption}
+                      </motion.p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         </motion.div>
@@ -165,18 +326,27 @@ export const ImageGallery = () => {
           <AnimatePresence>
             {selectedImage && (
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                className="rounded-2xl overflow-hidden shadow-heart"
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                className="rounded-2xl overflow-hidden shadow-heart bg-card"
               >
-                <img
-                  src={selectedImage.src}
-                  alt={selectedImage.caption}
-                  className="w-full"
-                />
-                <div className="bg-card p-6">
-                  <p className="text-xl font-cursive text-foreground">
+                <div className="relative">
+                  <img
+                    src={selectedImage.src}
+                    alt={selectedImage.caption}
+                    className="w-full max-h-[70vh] object-contain"
+                  />
+                  <motion.div
+                    className="absolute top-4 right-4"
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <Heart className="w-8 h-8 text-primary fill-primary drop-shadow-lg" />
+                  </motion.div>
+                </div>
+                <div className="p-6 text-center">
+                  <p className="text-2xl font-cursive text-foreground">
                     {selectedImage.caption}
                   </p>
                   <p className="text-sm text-muted-foreground mt-2">
