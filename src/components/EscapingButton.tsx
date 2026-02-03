@@ -23,8 +23,8 @@ export const EscapingButton = () => {
     if (!containerRef.current) return;
     
     const container = containerRef.current.getBoundingClientRect();
-    const maxX = 200;
-    const maxY = 150;
+    const maxX = 650;
+    const maxY = 390;
     
     const newX = (Math.random() - 0.5) * maxX * 2;
     const newY = (Math.random() - 0.5) * maxY * 2;

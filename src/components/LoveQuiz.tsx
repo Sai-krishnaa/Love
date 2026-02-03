@@ -9,45 +9,45 @@ const quizQuestions = [
     id: 1,
     question: "Where was our first meetup? 💕",
     options: [
-      "Coffee shop downtown",
-      "At a friend's party",
-      "Online",
-      "At work/school"
+      "Bhubaneswar",
+      "vems School",
+      "Kalinga stadium",
+      "Infocity square"
     ],
-    correctIndex: 0, // Update this to match the correct answer
+    correctIndex: [1] // Update this to match the correct answer
   },
   {
     id: 2,
     question: "What was our first date? 🌹",
     options: [
-      "Movie night",
-      "Dinner at a restaurant",
-      "Walk in the park",
-      "Cooking together"
+      "Birthday of mine",
+      "Mid term board exam ",
+      "Marks check ",
+      "In class"
     ],
-    correctIndex: 1,
+    correctIndex: [0, 1, 2, 3]
   },
   {
     id: 3,
     question: "When did we first meet? 📅",
     options: [
-      "Spring 2023",
-      "Summer 2023",
-      "Fall 2023",
-      "Winter 2023"
+      "Mar 2022",
+      "April 2023",
+      "May 2023",
+      "Feb 2023"
     ],
-    correctIndex: 2,
+    correctIndex: [0, 1, 2, 3]
   },
   {
     id: 4,
-    question: "What's our song? 🎵",
+    question: "Will you be my valentine ❤️",
     options: [
-      "Perfect - Ed Sheeran",
-      "All of Me - John Legend",
-      "A Thousand Years - Christina Perri",
-      "Can't Help Falling in Love - Elvis"
+      "Yes",
+      "Option A",
+      "Of course",
+      "All of the above"
     ],
-    correctIndex: 0,
+      correctIndex: [0, 1, 2, 3],
   },
 ];
 
@@ -65,7 +65,10 @@ export const LoveQuiz = ({ onComplete }: LoveQuizProps) => {
   const handleAnswer = (optionIndex: number) => {
     setSelectedAnswer(optionIndex);
     
-    if (optionIndex === quizQuestions[currentQuestion].correctIndex) {
+    const correct = quizQuestions[currentQuestion].correctIndex;
+    const isCorrect = Array.isArray(correct) ? correct.includes(optionIndex) : optionIndex === correct;
+
+    if (isCorrect) {
       setScore(score + 1);
     }
 
@@ -124,7 +127,8 @@ export const LoveQuiz = ({ onComplete }: LoveQuizProps) => {
 
                   <div className="space-y-4">
                     {question.options.map((option, index) => {
-                      const isCorrect = index === question.correctIndex;
+                      const correct = question.correctIndex;
+                      const isCorrect = Array.isArray(correct) ? correct.includes(index) : index === correct;
                       const isSelected = index === selectedAnswer;
                       
                       return (

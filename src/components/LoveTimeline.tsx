@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
+import img1 from '../assets/1.jpg';
+import loveCat from '../assets/love-cat.png';
+import img2 from '../assets/2.jpg'; 
+import img3 from '../assets/3.jpg';
+import img4 from '../assets/4.jpeg';  
+import img5 from '../assets/5.jpg';
 
 // ═══════════════════════════════════════════════════════════════
 // 📅 TIMELINE EVENTS - EDIT YOUR LOVE STORY HERE!
@@ -9,42 +15,43 @@ import { Heart } from 'lucide-react';
 const timelineEvents = [
   {
     id: 1,
-    date: "January 15, 2023",
+    date: "May 21 2022",
     title: "First Meeting",
     description: "The moment our eyes met for the first time...",
-    image: "/placeholder.svg", // 👈 Replace with your image
+    image: img1, // imported asset
     icon: "👋"
   },
   {
+    id: 4,
+    date: "May 28 2022",
+    title: "Became Official",
+    description: "The day we made it official...",
+    image: img5, // your uploaded photo (src/assets/5.jpg)
+    icon: "💕"
+  },
+  {
     id: 2,
-    date: "February 14, 2023",
+    date: "June 07 2022",
     title: "First Date",
     description: "Our first magical date together...",
-    image: "/placeholder.svg", // 👈 Replace with your image
+    image: img2, // your uploaded photo (src/assets/couple.jpg)
     icon: "💐"
   },
   {
     id: 3,
-    date: "March 20, 2023",
+    date: "Aug 12 2022",
     title: "First Kiss",
     description: "A moment I'll never forget...",
-    image: "/placeholder.svg", // 👈 Replace with your image
+    image: img3, // your uploaded photo (src/assets/3.jpg)
     icon: "💋"
   },
-  {
-    id: 4,
-    date: "April 10, 2023",
-    title: "Became Official",
-    description: "The day we made it official...",
-    image: "/placeholder.svg", // 👈 Replace with your image
-    icon: "💕"
-  },
+  
   {
     id: 5,
     date: "Forever",
     title: "Forever Together",
     description: "And the journey continues...",
-    image: "/placeholder.svg", // 👈 Replace with your image
+    image: img4, // fallback imported asset
     icon: "💍"
   },
 ];

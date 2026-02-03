@@ -19,6 +19,9 @@ const loveResponses = [
   "I'm keeping this forever in my heart! 💝",
   "You always know what to say! 🥹💕",
   "Sending you a million virtual hugs! 🤗💖",
+  "I love you even when you steal the blanket! 😄❤️",
+  "You make my heart so full! Thank you! 💕",
+  "Can't wait to see you and read this in person! 😍💌",
 ];
 
 export const LeaveNoteSection = () => {

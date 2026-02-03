@@ -2,7 +2,13 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Heart } from 'lucide-react';
-
+import img4 from '../assets/4.jpeg'; 
+import img6 from '../assets/6.jpg'; 
+import img7 from '../assets/7.jpg';
+import img8 from '../assets/8.jpg';  
+import img9 from '../assets/9.jpeg';
+import img10 from '../assets/10.jpeg';
+import img11 from '../assets/11.jpeg';
 // ═══════════════════════════════════════════════════════════════
 // 🖼️ GALLERY IMAGES - EDIT YOUR PHOTOS HERE!
 // Replace "src" with your image path (e.g., "/my-photo.jpg")
@@ -11,39 +17,39 @@ import { Heart } from 'lucide-react';
 const galleryImages = [
   {
     id: 1,
-    src: "/placeholder.svg", // 👈 Replace with your image
+    src: img6, // 👈 Replace with your image
     caption: "Our first adventure together 💕",
-    date: "January 2024"
+    date: "Budha park"
   },
   {
     id: 2,
-    src: "/placeholder.svg", // 👈 Replace with your image
+    src: img7, // 👈 Replace with your image
     caption: "That sunset we'll never forget 🌅",
-    date: "February 2024"
+    date: "Jaydev vathika"
   },
   {
     id: 3,
-    src: "/placeholder.svg", // 👈 Replace with your image
+    src: img8, // 👈 Replace with your image
     caption: "Just us being silly 😂",
-    date: "March 2024"
+    date: "Ram mandir"
   },
   {
     id: 4,
-    src: "/placeholder.svg", // 👈 Replace with your image
+    src: img9, // 👈 Replace with your image
     caption: "Our favorite spot 🌸",
-    date: "April 2024"
+    date: "Bindusagar"
   },
   {
     id: 5,
-    src: "/placeholder.svg", // 👈 Replace with your image
+    src: img10, // 👈 Replace with your image
     caption: "Making memories 💖",
-    date: "May 2024"
+    date: "Iter"
   },
   {
     id: 6,
-    src: "/placeholder.svg", // 👈 Replace with your image
+    src: img11, // 👈 Replace with your image
     caption: "Forever my favorite person 💝",
-    date: "June 2024"
+    date: "Ram mandir"
   },
 ];
 
@@ -51,9 +57,9 @@ const galleryImages = [
 // 🥰 FIRST DATE SECTION - EDIT YOUR SPECIAL PHOTO HERE!
 // ═══════════════════════════════════════════════════════════════
 const firstDatePhoto = {
-  src: "/placeholder.svg", // 👈 Replace with your first date photo
-  caption: "Where it all began... 💕",
-  date: "Our First Date"
+  src: img4, // 👈 Replace with your first date photo
+  caption: "Forever....💕",
+  date: "Our Best memories"
 };
 
 interface GalleryImage {
@@ -253,7 +259,7 @@ export const ImageGallery = () => {
             <span className="text-3xl">💑</span>
           </motion.div>
           <h3 className="text-3xl sm:text-4xl font-cursive text-love-gradient mb-8">
-            Our First Date
+            Our Best memory
           </h3>
           
           <motion.div

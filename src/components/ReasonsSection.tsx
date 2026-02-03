@@ -1,10 +1,9 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, ChevronDown } from 'lucide-react';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Heart, ChevronDown } from "lucide-react";
 
 // ═══════════════════════════════════════════════════════════════
-// 💯 100 REASONS WHY I LOVE YOU - EDIT YOUR REASONS HERE!
-// Add, remove, or modify any reason you want
+// 💯 100 REASONS WHY I LOVE YOU
 // ═══════════════════════════════════════════════════════════════
 const allReasons = [
   "Your beautiful smile lights up my world",
@@ -110,33 +109,36 @@ const allReasons = [
 ];
 
 const INITIAL_COUNT = 12;
-const LOAD_MORE_COUNT = 12;
+const LOAD_MORE_COUNT = 24;
 
 export const ReasonsSection = () => {
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
+
   const displayedReasons = allReasons.slice(0, visibleCount);
   const hasMore = visibleCount < allReasons.length;
 
   const loadMore = () => {
-    setVisibleCount(prev => Math.min(prev + LOAD_MORE_COUNT, allReasons.length));
+    setVisibleCount((prev) =>
+      Math.min(prev + LOAD_MORE_COUNT, allReasons.length)
+    );
   };
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.05 }
-    }
+      transition: { staggerChildren: 0.05 },
+    },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.9 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
       scale: 1,
-      transition: { type: "spring" as const, stiffness: 150, damping: 15 }
-    }
+      transition: { type: "spring", stiffness: 140, damping: 16 },
+    },
   };
 
   return (
@@ -145,17 +147,10 @@ export const ReasonsSection = () => {
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <motion.div
-            className="flex justify-center gap-2 mb-4"
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <span className="text-5xl">💯</span>
-          </motion.div>
+          <div className="flex justify-center mb-4 text-5xl">💯</div>
           <h2 className="text-4xl sm:text-6xl font-cursive text-love-gradient mb-4">
             100 Reasons Why I Love You
           </h2>
@@ -169,90 +164,60 @@ export const ReasonsSection = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
           variants={containerVariants}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+          animate="visible"
         >
-          <AnimatePresence>
-            {displayedReasons.map((reason, index) => (
+          {displayedReasons.map((reason, index) => (
+            <motion.div key={index} variants={itemVariants}>
               <motion.div
-                key={index}
-                variants={itemVariants}
-                layout
-                className="group"
+                className="relative p-5 rounded-2xl bg-card/80 backdrop-blur-sm shadow-soft border border-primary/10 h-full"
+                whileHover={{ scale: 1.03, y: -5 }}
               >
+                <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">
+                  {index + 1}
+                </div>
+
+                <p className="text-foreground/90 text-sm leading-relaxed pt-2">
+                  {reason}
+                </p>
+
                 <motion.div
-                  className="relative p-5 rounded-2xl bg-card/80 backdrop-blur-sm shadow-soft hover:shadow-love transition-all duration-300 h-full border border-primary/10"
-                  whileHover={{ scale: 1.03, y: -5 }}
+                  className="absolute bottom-2 right-2"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 1.2, repeat: Infinity }}
                 >
-                  {/* Number badge */}
-                  <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-heart">
-                    {index + 1}
-                  </div>
-                  
-                  <p className="text-foreground/90 text-sm leading-relaxed pt-2">
-                    {reason}
-                  </p>
-                  
-                  {/* Heart decoration on hover */}
-                  <motion.div
-                    className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                  >
-                    <Heart className="w-4 h-4 text-primary fill-primary" />
-                  </motion.div>
+                  <Heart className="w-4 h-4 text-primary fill-primary" />
                 </motion.div>
               </motion.div>
-            ))}
-          </AnimatePresence>
+            </motion.div>
+          ))}
         </motion.div>
 
-        {/* Load More Button */}
-        {hasMore && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center mt-12"
-          >
+        {/* Load More */}
+        {hasMore ? (
+          <div className="text-center mt-12">
             <motion.button
               onClick={loadMore}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold shadow-heart hover:shadow-love transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold shadow-heart"
             >
               Show More Reasons 💕
-              <motion.div
-                animate={{ y: [0, 3, 0] }}
-                transition={{ duration: 1, repeat: Infinity }}
-              >
-                <ChevronDown className="w-5 h-5" />
-              </motion.div>
+              <ChevronDown className="w-5 h-5" />
             </motion.button>
-            <p className="text-muted-foreground text-sm mt-3">
+            <p className="text-sm text-muted-foreground mt-3">
               {visibleCount} of {allReasons.length} reasons
             </p>
-          </motion.div>
-        )}
-
-        {/* All shown message */}
-        {!hasMore && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-center mt-12"
-          >
-            <motion.div
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-card shadow-love"
-              animate={{ scale: [1, 1.02, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
+          </div>
+        ) : (
+          <div className="text-center mt-12">
+            <div className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-card shadow-love">
               <Heart className="w-5 h-5 text-primary fill-primary" />
               <span className="font-cursive text-xl text-love-gradient">
                 And a million more reasons... 💕
               </span>
               <Heart className="w-5 h-5 text-primary fill-primary" />
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         )}
       </div>
     </section>

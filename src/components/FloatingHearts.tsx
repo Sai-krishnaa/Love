@@ -9,7 +9,7 @@ interface Heart {
   emoji: string;
 }
 
-const heartEmojis = ['💕', '💖', '💗', '💓', '💝', '❤️', '🩷', '💘'];
+const heartEmojis = ['💕', '💖', '💗','😊','🙈', '🦄', '🦄', '🦄', '🦄', '😺', '🥰', '🐣',];
 
 export const FloatingHearts = () => {
   const [hearts, setHearts] = useState<Heart[]>([]);

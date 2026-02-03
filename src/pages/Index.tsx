@@ -1,14 +1,13 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { HeroSection } from '@/components/HeroSection';
-import { CelebrationSection } from '@/components/CelebrationSection';
 import { LoveQuiz } from '@/components/LoveQuiz';
+import { CelebrationSection } from '@/components/CelebrationSection';
 import { LoveTimeline } from '@/components/LoveTimeline';
 import { ImageGallery } from '@/components/ImageGallery';
 import { ReasonsSection } from '@/components/ReasonsSection';
 import { LoveNotesSection } from '@/components/LoveNotesSection';
-import { CoupleGoalsSection } from '@/components/CoupleGoalsSection';
-import { LoveCalculator } from '@/components/LoveCalculator';
+import { LoveCalculator } from '../components/LoveCalculator';
 import { FinalLoveLetter } from '@/components/FinalLoveLetter';
 import { LeaveNoteSection } from '@/components/LeaveNoteSection';
 import { PromisesSection } from '@/components/PromisesSection';
@@ -16,6 +15,8 @@ import { PromisesSection } from '@/components/PromisesSection';
 const Index = () => {
   const [started, setStarted] = useState(false);
   const [showCelebration, setShowCelebration] = useState(false);
+
+  const galleryRef = useRef<HTMLDivElement | null>(null);
 
   const handleYesClick = () => {
     setShowCelebration(true);
@@ -60,14 +61,17 @@ const Index = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            {/* Love Story Timeline */}
-            <LoveTimeline />
+            
 
             {/* Love Quiz */}
-            <LoveQuiz onComplete={() => {}} />
+            <LoveQuiz onComplete={() => galleryRef.current?.scrollIntoView({ behavior: 'smooth' })} />
 
             {/* Image Gallery */}
-            <ImageGallery />
+            <div ref={galleryRef}>
+              <ImageGallery />
+            </div>
+            {/* Love Story Timeline */}
+            <LoveTimeline />
 
             {/* 100 Reasons Why I Love You */}
             <ReasonsSection />
@@ -75,8 +79,7 @@ const Index = () => {
             {/* Love Notes */}
             <LoveNotesSection />
 
-            {/* Couple Goals */}
-            <CoupleGoalsSection />
+            {/* Couple Goals — replaced by Love Intensity Meter */}
 
             {/* Love Calculator */}
             <LoveCalculator />

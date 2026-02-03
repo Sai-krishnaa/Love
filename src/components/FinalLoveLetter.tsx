@@ -11,10 +11,23 @@ const letterContent = {
     "From the moment you walked into my life, everything changed. Colors became brighter, music sounded sweeter, and every ordinary day transformed into an extraordinary adventure just because you were in it.",
     "You are my sunshine on cloudy days, my anchor in stormy seas, and my forever source of joy. The way you love me, with all my flaws and imperfections, makes me believe in fairy tales and happy endings.",
     "Every laugh we share, every tear we wipe away together, every silent moment we spend just being in each other's presence - these are the treasures I hold closest to my heart.",
-    "Thank you for choosing me, for loving me, for being my partner in this beautiful journey called life. I promise to cherish you, support you, and love you with everything I have, today and always.",
+
+    "I don’t love you in loud, dramatic ways I love you in the quiet moments — the ones most people don’t notice but that somehow matter the most.I love you in the way my mind looks for you first when something good happens… and even when something goes wrong.",
+
+   "In the way your presence calms me without trying ,In the way you feel like home — not because everything is perfect, but because with you, I don’t have to pretend , You’ve seen parts of me that aren’t impressive, polished, or easy to love — and you stayed.",
+
+  "That alone means more to me than any grand gesture ever could,You challenge me , You soften me where I’m too hard, and strengthen me where I doubt myself,Because of you, I want to grow — not out of fear of losing you, but out of respect for what we have.",
+
+"I don’t just love you for who you are today.",
+"I love you for who you’re becoming — and for letting me walk that journey with you.",
+"You are not just someone I love.",
+"You are someone I choose.",
+"Thank you for choosing me, for loving me, for being my partner in this beautiful journey called life. I promise to cherish you, support you, and love you with everything I have, today and always.",
+
+    
   ],
   closing: "Forever and Always Yours,",
-  signature: "Your Valentine 💕"
+  signature: "Your Saikrishna (chipmunk) 💕"
 };
 
 export const FinalLoveLetter = () => {
