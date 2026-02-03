@@ -3,34 +3,33 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { HeroSection } from '@/components/HeroSection';
 import { CelebrationSection } from '@/components/CelebrationSection';
 import { LoveQuiz } from '@/components/LoveQuiz';
+import { LoveTimeline } from '@/components/LoveTimeline';
 import { ImageGallery } from '@/components/ImageGallery';
+import { ReasonsSection } from '@/components/ReasonsSection';
+import { LoveNotesSection } from '@/components/LoveNotesSection';
+import { CoupleGoalsSection } from '@/components/CoupleGoalsSection';
+import { LoveCalculator } from '@/components/LoveCalculator';
+import { FinalLoveLetter } from '@/components/FinalLoveLetter';
+import { LeaveNoteSection } from '@/components/LeaveNoteSection';
 import { PromisesSection } from '@/components/PromisesSection';
 
-type Section = 'hero' | 'celebration' | 'quiz' | 'gallery' | 'promises';
-
 const Index = () => {
-  const [currentSection, setCurrentSection] = useState<Section>('hero');
+  const [started, setStarted] = useState(false);
+  const [showCelebration, setShowCelebration] = useState(false);
 
   const handleYesClick = () => {
-    setCurrentSection('celebration');
+    setShowCelebration(true);
   };
 
   const handleContinue = () => {
-    setCurrentSection('quiz');
-  };
-
-  const handleQuizComplete = () => {
-    setCurrentSection('gallery');
-  };
-
-  const scrollToPromises = () => {
-    setCurrentSection('promises');
+    setStarted(true);
+    setShowCelebration(false);
   };
 
   return (
     <div className="min-h-screen gradient-romantic overflow-x-hidden">
       <AnimatePresence mode="wait">
-        {currentSection === 'hero' && (
+        {!started && !showCelebration && (
           <motion.div
             key="hero"
             initial={{ opacity: 0 }}
@@ -42,7 +41,7 @@ const Index = () => {
           </motion.div>
         )}
 
-        {currentSection === 'celebration' && (
+        {showCelebration && (
           <motion.div
             key="celebration"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -54,56 +53,50 @@ const Index = () => {
           </motion.div>
         )}
 
-        {currentSection === 'quiz' && (
+        {started && (
           <motion.div
-            key="quiz"
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 0.5 }}
-          >
-            <LoveQuiz onComplete={handleQuizComplete} />
-          </motion.div>
-        )}
-
-        {currentSection === 'gallery' && (
-          <motion.div
-            key="gallery"
+            key="main-content"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <ImageGallery />
-            <div className="gradient-romantic py-8 text-center">
-              <motion.button
-                onClick={scrollToPromises}
-                className="px-8 py-4 bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-full font-semibold text-lg shadow-heart hover:shadow-love transition-all hover:scale-105"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                See my promises to you 💕
-              </motion.button>
-            </div>
-          </motion.div>
-        )}
+            {/* Love Story Timeline */}
+            <LoveTimeline />
 
-        {currentSection === 'promises' && (
-          <motion.div
-            key="promises"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+            {/* Love Quiz */}
+            <LoveQuiz onComplete={() => {}} />
+
+            {/* Image Gallery */}
+            <ImageGallery />
+
+            {/* 100 Reasons Why I Love You */}
+            <ReasonsSection />
+
+            {/* Love Notes */}
+            <LoveNotesSection />
+
+            {/* Couple Goals */}
+            <CoupleGoalsSection />
+
+            {/* Love Calculator */}
+            <LoveCalculator />
+
+            {/* Promises Section */}
             <PromisesSection />
-            
+
+            {/* Final Love Letter */}
+            <FinalLoveLetter />
+
+            {/* Leave Me a Love Note */}
+            <LeaveNoteSection />
+
             {/* Footer */}
             <footer className="gradient-romantic py-12 text-center">
               <motion.div
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
               >
                 <p className="text-3xl font-cursive text-love-gradient mb-4">
                   Made with all my love 💝
