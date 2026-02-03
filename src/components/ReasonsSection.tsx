@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Heart, ChevronDown } from "lucide-react";
-
+import type { Variants } from "framer-motion";
 // ═══════════════════════════════════════════════════════════════
 // 💯 100 REASONS WHY I LOVE YOU
 // ═══════════════════════════════════════════════════════════════
@@ -131,13 +131,13 @@ export const ReasonsSection = () => {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20, scale: 0.95 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { type: "spring", stiffness: 140, damping: 16 },
+      transition: { type: "spring" as const, stiffness: 140, damping: 16 },
     },
   };
 
