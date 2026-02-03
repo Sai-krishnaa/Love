@@ -14,7 +14,7 @@ const App = () => (
       <Toaster />
       <Sonner />
 
-      {/* 🔥 FIX: basename must match repo name */}
+      {/* 🔥 THIS LINE IS THE KEY */}
       <BrowserRouter basename="/Love">
         <Routes>
           <Route path="/" element={<Index />} />
